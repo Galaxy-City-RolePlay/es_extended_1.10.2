@@ -49,7 +49,7 @@ Locales["de"] = {
 	["account_bank"] = "Bank",
 	["account_black_money"] = "Schwarzgeld",
 	["account_money"] = "Bargeld",
-
+	["account_vipcoins"] = "VIP Coins",
 	["act_imp"] = "Du kannst diese Aktion nicht ausführen!",
 	["in_vehicle"] = "Du kannst diese Aktion nicht ausführen! Person ist in einem Fahrzeug",
 	["not_in_vehicle"] = "Cannot Perform Action, Player isn't in a vehicle",
