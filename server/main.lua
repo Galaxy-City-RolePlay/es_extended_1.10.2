@@ -1,7 +1,7 @@
-SetMapName('San Andreas')
-SetGameType('ESX Legacy')
+SetMapName('Galaxy City')
+SetGameType('Roleplay')
 
-local oneSyncState = GetConvar('onesync', 'off')
+local oneSyncState = GetConvar('onesync', 'on')
 local newPlayer = 'INSERT INTO `users` SET `accounts` = ?, `identifier` = ?, `group` = ?'
 local loadPlayer = 'SELECT `accounts`, `job`, `job_grade`, `group`, `position`, `inventory`, `skin`, `loadout`, `metadata`'
 
