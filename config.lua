@@ -1,5 +1,5 @@
 Config                      = {}
-Config.Locale               = GetConvar('esx:locale', 'en')
+Config.Locale               = GetConvar('esx:locale', 'de')
 
 Config.Accounts             = {
 	bank = {
@@ -12,6 +12,10 @@ Config.Accounts             = {
 	},
 	money = {
 		label = TranslateCap('account_money'),
+		round = true
+	},
+	vipcoins = {
+		label = TranslateCap('account_vipcoins'),
 		round = true
 	}
 }
@@ -30,13 +34,14 @@ Config.DefaultSpawns = { -- If you want to have more spawn positions and select 
 
 Config.AdminGroups = {
 	['owner'] = true,
-	['admin'] = true
+	['admin'] = true,
+	['manager'] = true
 }
 
 
 Config.EnablePaycheck            = true      -- enable paycheck
-Config.LogPaycheck               = false     -- Logs paychecks to a nominated Discord channel via webhook (default is false)
-Config.EnableSocietyPayouts      = false     -- pay from the society account that the player is employed at? Requirement: esx_society
+Config.LogPaycheck               = true     -- Logs paychecks to a nominated Discord channel via webhook (default is false)
+Config.EnableSocietyPayouts      = true     -- pay from the society account that the player is employed at? Requirement: esx_society
 Config.MaxWeight                 = 24        -- the max inventory weight without backpack
 Config.PaycheckInterval          = 7 * 60000 -- how often to recieve pay checks in milliseconds
 Config.EnableDebug               = false     -- Use Debug options?
@@ -48,16 +53,16 @@ Config.Multichar                 = GetResourceState("esx_multicharacter") ~= "mi
 Config.Identity                  = true  -- Select a characters identity data before they have loaded in (this happens by default with multichar)
 Config.DistanceGive              = 4.0   -- Max distance when giving items, weapons etc.
 
-Config.AdminLogging              = false -- Logs the usage of certain commands by those with group.admin ace permissions (default is false)
+Config.AdminLogging              = true -- Logs the usage of certain commands by those with group.admin ace permissions (default is false)
 
 Config.DisableHealthRegeneration = false -- Player will no longer regenerate health
-Config.DisableVehicleRewards     = false -- Disables Player Recieving weapons from vehicles
-Config.DisableNPCDrops           = false -- stops NPCs from dropping weapons on death
-Config.DisableDispatchServices   = false -- Disable Dispatch services
+Config.DisableVehicleRewards     = true -- Disables Player Recieving weapons from vehicles
+Config.DisableNPCDrops           = true -- stops NPCs from dropping weapons on death
+Config.DisableDispatchServices   = true -- Disable Dispatch services
 Config.DisableScenarios          = false -- Disable Scenarios
 Config.DisableWeaponWheel        = false -- Disables default weapon wheel
-Config.DisableAimAssist          = false -- disables AIM assist (mainly on controllers)
-Config.DisableVehicleSeatShuff   = false -- Disables vehicle seat shuff
+Config.DisableAimAssist          = true -- disables AIM assist (mainly on controllers)
+Config.DisableVehicleSeatShuff   = true -- Disables vehicle seat shuff
 Config.DisableDisplayAmmo  		 = false -- Disable ammunition display
 Config.RemoveHudComponents       = {
 	[1] = false,                         --WANTED_STARS,
@@ -84,8 +89,8 @@ Config.RemoveHudComponents       = {
 	[22] = false,                        --HUD_WEAPONS
 }
 
-Config.SpawnVehMaxUpgrades       = true       -- admin vehicles spawn with max vehcle settings
-Config.CustomAIPlates            = '........' -- Custom plates for AI vehicles
+Config.SpawnVehMaxUpgrades       = false       -- admin vehicles spawn with max vehcle settings
+Config.CustomAIPlates            = '111 AAA' -- Custom plates for AI vehicles
 -- Pattern string format
 --1 will lead to a random number from 0-9.
 --A will lead to a random letter from A-Z.
