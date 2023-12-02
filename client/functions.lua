@@ -70,12 +70,22 @@ function ESX.Progressbar(message, length, Options)
         return exports["esx_progressbar"]:Progressbar(message, length, Options)
     end
 
+    if GetResourceState("ox_lib") ~= "missing" then
+        --return exports["ox_lib"]:Progressbar(message, length, Options)
+    end
+
     print("[^1ERROR^7] ^5ESX Progressbar^7 is Missing!")
 end
 
 function ESX.ShowNotification(message, notifyType, length)
-    if GetResourceState("esx_notify") ~= "missing" then
-        return exports["esx_notify"]:Notify(notifyType, length, message)
+    local type = "info"
+    if GetResourceState("qs-notify") ~= "missing" then
+        if notifyType == "inform" then type = "info" end
+        type = notifyType
+        if type == "warning" or type == "success" or type == "info" or type == "success" then   
+            return exports["qs-notify"]:Alert(message, length, notifyType)
+        end
+        return exports["qs-notify"]:Alert(message, length, "info")
     end
 
     print("[^1ERROR^7] ^5ESX Notify^7 is Missing!")
