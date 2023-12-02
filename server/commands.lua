@@ -1,4 +1,4 @@
-ESX.RegisterCommand({'setcoords', 'tp'}, 'admin', function(xPlayer, args)
+ESX.RegisterCommand({'esx_setcoords', 'tp'}, 'mod', function(xPlayer, args)
 	xPlayer.setCoords({ x = args.x, y = args.y, z = args.z })
 	if Config.AdminLogging then
 		ESX.DiscordLogFields("UserActions", "Set Coordinates /setcoords Triggered!", "pink", {
@@ -19,7 +19,7 @@ end, false, {
 	}
 })
 
-ESX.RegisterCommand('setjob', 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand('setjob', 'manager', function(xPlayer, args, showError)
 	if not ESX.DoesJobExist(args.job, args.grade) then
 		return showError(TranslateCap('command_setjob_invalid'))
 	end
@@ -55,7 +55,7 @@ local upgrades = Config.SpawnVehMaxUpgrades and
 		windowTint = 1
 	} or {}
 
-ESX.RegisterCommand('car', 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand('car', 'manager', function(xPlayer, args, showError)
 	if not xPlayer then
 		return showError('[^1ERROR^7] The xPlayer value is nil')
 	end
@@ -105,7 +105,7 @@ end, false, {
 	}
 })
 
-ESX.RegisterCommand({ 'cardel', 'dv' }, 'admin', function(xPlayer, args)
+ESX.RegisterCommand({ 'cardel', 'dv' }, 'mod', function(xPlayer, args)
 	local PedVehicle = GetVehiclePedIsIn(GetPlayerPed(xPlayer.source), false)
 	if DoesEntityExist(PedVehicle) then
 		DeleteEntity(PedVehicle)
@@ -132,7 +132,7 @@ end, false, {
 	}
 })
 
-ESX.RegisterCommand({ 'fix', 'repair' }, 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand({ 'fixcar', 'repair' }, 'manager', function(xPlayer, args, showError)
     local xTarget = args.playerId
 	local ped = GetPlayerPed(xTarget.source)
 	local pedVehicle = GetVehiclePedIsIn(ped, false)
@@ -160,7 +160,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('setaccountmoney', 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand('setaccountmoney', 'manager', function(xPlayer, args, showError)
 	if not args.playerId.getAccount(args.account) then
 		return showError(TranslateCap('command_giveaccountmoney_invalid'))
 	end
@@ -184,7 +184,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('giveaccountmoney', 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand('giveaccountmoney', 'manager', function(xPlayer, args, showError)
 	if not args.playerId.getAccount(args.account) then
 		return showError(TranslateCap('command_giveaccountmoney_invalid'))
 	end
@@ -208,7 +208,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('removeaccountmoney', 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand('removeaccountmoney', 'manager', function(xPlayer, args, showError)
 	if not args.playerId.getAccount(args.account) then
 		return showError(TranslateCap('command_removeaccountmoney_invalid'))
 	end
@@ -343,7 +343,7 @@ ESX.RegisterCommand({ 'clear', 'cls' }, 'user', function(xPlayer)
 	xPlayer.triggerEvent('chat:clear')
 end, false, { help = TranslateCap('command_clear') })
 
-ESX.RegisterCommand({ 'clearall', 'clsall' }, 'admin', function(xPlayer)
+ESX.RegisterCommand({ 'clearall', 'clsall' }, 'mod', function(xPlayer)
 	TriggerClientEvent('chat:clear', -1)
 	if Config.AdminLogging then
 		ESX.DiscordLogFields("UserActions", "Clear Chat /clearall Triggered!", "pink", {
@@ -380,7 +380,7 @@ if not Config.OxInventory and not Config.QSInventory then
 		}
 	})
 
-	ESX.RegisterCommand('clearloadout', 'admin', function(xPlayer, args)
+	ESX.RegisterCommand('esx_clearloadout', 'manager', function(xPlayer, args)
 		for i = #args.playerId.loadout, 1, -1 do
 			args.playerId.removeWeapon(args.playerId.loadout[i].name)
 		end
@@ -401,7 +401,7 @@ if not Config.OxInventory and not Config.QSInventory then
 	})
 end
 
-ESX.RegisterCommand('setgroup', 'admin', function(xPlayer, args)
+ESX.RegisterCommand('setgroup', 'manager', function(xPlayer, args)
 	if not args.playerId then args.playerId = xPlayer.source end
 	if args.group == "superadmin" then
 		args.group = "admin"
@@ -425,7 +425,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('save', 'admin', function(_, args)
+ESX.RegisterCommand('save', 'manager', function(_, args)
 	Core.SavePlayer(args.playerId)
 	print(('[^2Info^0] Saved Player - ^5%s^0'):format(args.playerId.source))
 end, true, {
@@ -436,7 +436,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('saveall', 'admin', function()
+ESX.RegisterCommand('saveall', 'manager', function()
 	Core.SavePlayers()
 end, true, { help = TranslateCap('command_saveall') })
 
@@ -473,7 +473,7 @@ ESX.RegisterCommand('tpm', "admin", function(xPlayer)
 	end
 end, true)
 
-ESX.RegisterCommand('goto', "admin", function(xPlayer, args)
+ESX.RegisterCommand('esx_goto', "mod", function(xPlayer, args)
 	local targetCoords = args.playerId.getCoords()
 	xPlayer.setCoords(targetCoords)
 	if Config.AdminLogging then
@@ -492,7 +492,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('bring', "admin", function(xPlayer, args)
+ESX.RegisterCommand('esx_bring', "mod", function(xPlayer, args)
 	local targetCoords = args.playerId.getCoords()
 	local playerCoords = xPlayer.getCoords()
 	args.playerId.setCoords(playerCoords)
@@ -512,7 +512,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('kill', "admin", function(xPlayer, args)
+ESX.RegisterCommand('esx_kill', "manager", function(xPlayer, args)
 	args.playerId.triggerEvent("esx:killPlayer")
 	if Config.AdminLogging then
 		ESX.DiscordLogFields("UserActions", "Kill Command /kill Triggered!", "pink", {
@@ -529,7 +529,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('freeze', "admin", function(xPlayer, args)
+ESX.RegisterCommand('esx_freeze', "mod", function(xPlayer, args)
 	args.playerId.triggerEvent('esx:freezePlayer', "freeze")
 	if Config.AdminLogging then
 		ESX.DiscordLogFields("UserActions", "Admin Freeze /freeze Triggered!", "pink", {
@@ -546,7 +546,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand('unfreeze', "admin", function(xPlayer, args)
+ESX.RegisterCommand('esx_unfreeze', "mod", function(xPlayer, args)
 	args.playerId.triggerEvent('esx:freezePlayer', "unfreeze")
 	if Config.AdminLogging then
 		ESX.DiscordLogFields("UserActions", "Admin UnFreeze /unfreeze Triggered!", "pink", {
@@ -563,7 +563,7 @@ end, true, {
 	}
 })
 
-ESX.RegisterCommand("noclip", 'admin', function(xPlayer)
+ESX.RegisterCommand("esx_noclip", 'mod', function(xPlayer)
 	xPlayer.triggerEvent('esx:noclip')
 	if Config.AdminLogging then
 		ESX.DiscordLogFields("UserActions", "Admin NoClip /noclip Triggered!", "pink", {
@@ -573,7 +573,7 @@ ESX.RegisterCommand("noclip", 'admin', function(xPlayer)
 	end
 end, false)
 
-ESX.RegisterCommand('players', "admin", function()
+ESX.RegisterCommand('players', "manager", function()
     local xPlayers = ESX.GetExtendedPlayers() -- Returns all xPlayers
 	print(('^5%s^2 online player(s)^0'):format(#xPlayers))
     for i = 1, #(xPlayers) do
