@@ -92,6 +92,12 @@ ESX.RegisterCommand('car', 'manager', function(xPlayer, args, showError)
 					break
 				end
 			end
+					
+			-- jaksam's vehicles keys integration
+			SetTimeout(2000, function() 
+			  exports["vehicles_keys"]:giveVehicleKeysToPlayerId(xPlayer.source, GetVehicleNumberPlateText(vehicle), "temporary")
+			end)
+					
 			if GetVehiclePedIsIn(playerPed, false) ~= vehicle then
 				showError('[^1ERROR^7] The player could not be seated in the vehicle')
 			end
@@ -232,7 +238,7 @@ end, true, {
 	}
 })
 
-if not Config.OxInventory and not Config.QSInventory then
+--[[if not Config.OxInventory and not Config.QSInventory then
 	ESX.RegisterCommand('giveitem', 'admin', function(xPlayer, args)
 		args.playerId.addInventoryItem(args.item, args.count)
 		if Config.AdminLogging then
@@ -337,7 +343,7 @@ if not Config.OxInventory and not Config.QSInventory then
 			{ name = 'componentName', help = TranslateCap('command_giveweaponcomponent_component'), type = 'string' }
 		}
 	})
-end
+end]]--
 
 ESX.RegisterCommand({ 'clear', 'cls' }, 'user', function(xPlayer)
 	xPlayer.triggerEvent('chat:clear')
@@ -353,7 +359,7 @@ ESX.RegisterCommand({ 'clearall', 'clsall' }, 'mod', function(xPlayer)
 	end
 end, true, { help = TranslateCap('command_clearall') })
 
-ESX.RegisterCommand("refreshjobs", 'admin', function()
+ESX.RegisterCommand("esx_refreshjobs", 'manager', function()
 	ESX.RefreshJobs()
 end, true, { help = TranslateCap('command_clearall') })
 
