@@ -92,19 +92,19 @@ function ESX.ShowNotification(message, notifyType, length)
 end
 
 function ESX.TextUI(message, notifyType)
-    if GetResourceState("esx_textui") ~= "missing" then
-        return exports["esx_textui"]:TextUI(message, notifyType)
+    if GetResourceState("okokTextUI") ~= "missing" then
+        return exports["okokTextUI"]:Open(message, "darkgreen", "left"))
     end
 
-    print("[^1ERROR^7] ^5ESX TextUI^7 is Missing!")
+    print("[^1ERROR^7] ^5ESX okokTextUI^7 is Missing!")
 end
 
 function ESX.HideUI()
-    if GetResourceState("esx_textui") ~= "missing" then
-        return exports["esx_textui"]:HideUI()
+    if GetResourceState("okokTextUI") ~= "missing" then
+        return exports["okokTextUI"]:Close()
     end
 
-    print("[^1ERROR^7] ^5ESX TextUI^7 is Missing!")
+    print("[^1ERROR^7] ^5okokTextUI^7 is Missing!")
 end
 
 function ESX.ShowAdvancedNotification(sender, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
